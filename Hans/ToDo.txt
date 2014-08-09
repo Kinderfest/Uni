@@ -1,4 +1,5 @@
 To Do:
--Unterscheiden zwischen Forum und Bewertung
+-Unterscheiden zwischen Forum und Bewertung. DONE
 -Forum parsen
 -Bewertung parsen
+-Umlaute
