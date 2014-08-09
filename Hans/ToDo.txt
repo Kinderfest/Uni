@@ -1,0 +1,4 @@
+To Do:
+-Unterscheiden zwischen Forum und Bewertung
+-Forum parsen
+-Bewertung parsen
