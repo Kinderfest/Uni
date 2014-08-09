@@ -1,5 +1,8 @@
 To Do:
 -Unterscheiden zwischen Forum und Bewertung. DONE
--Forum parsen
+-Forum parsen. DONE
+-Threads parsen
 -Bewertung parsen
--Umlaute
+-Umlaute !!!
+
+-In Android porten
