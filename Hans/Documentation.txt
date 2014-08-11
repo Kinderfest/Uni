@@ -1,0 +1,7 @@
+07.08.14 - 08.08.14 
+	GripsLogin
+08.08.14
+	Parsen von meinen Kursen mit jsoup
+	CookieStore um eingeloggt zu bleiben
+09.08.14
+	Parsen der Foren ( Threads, nicht die einzelnen Posts )
