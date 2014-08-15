@@ -5,3 +5,11 @@
 	CookieStore um eingeloggt zu bleiben
 09.08.14
 	Parsen der Foren ( Threads, nicht die einzelnen Posts )
+15.08.14
+	AndroidPort Beginn
+
+
+
+Verwendete Libs:
+	jsoup - Parse
+	httpclient - Parse
