@@ -6,3 +6,4 @@ To Do:
 -Umlaute !!!
 
 -In Android porten
+- Exception! Vermutung Adapter
