@@ -7,11 +7,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import de.ur.mi.mspwddhs.campusapp.R;
+import de.ur.mi.mspwddhs.campusapp.database.Database;
 
 public class CourseListAdapter extends BaseExpandableListAdapter {
 	private ArrayList<Course> data;
@@ -94,18 +96,21 @@ public class CourseListAdapter extends BaseExpandableListAdapter {
 		} else {
 			collapse.setVisibility(View.INVISIBLE);
 		}
-		
-//		convertView.setLongClickable(true);
-//		convertView.setOnLongClickListener(new OnLongClickListener() {
-//
+//		
+//		title.setOnLongClickListener(new OnLongClickListener() {
+//			
 //			@Override
 //			public boolean onLongClick(View v) {
-//				((MainActivity) activity).deleteSingleCourse(v, data.get(groupPosition).getCourseName(), data.get(groupPosition).getCourseUrl());
-////				Database db = new Database(context);
+//				Database db = new Database(context);
+//				db.open();
+//				db.clearSingleRowGrips(data.get(groupPosition).getCourseName()+";"+data.get(groupPosition).getCourseUrl());
+//				db.close();
+//				data.remove(groupPosition);
+//				((GripsActivity) activity).updateList();
 //				return false;
-//			};
+//			}
 //		});
-//	
+		
 		return convertView;
 	}
 
