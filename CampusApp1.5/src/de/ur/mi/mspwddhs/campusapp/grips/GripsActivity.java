@@ -98,7 +98,8 @@ public class GripsActivity extends OptionsActivity implements OnParseListener {
 				Intent intent = new Intent(GripsActivity.this, MensaActivity.class);
 				intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION);
 				startActivity(intent);
-//				finish();
+				finish();
+				overridePendingTransition(0, 0);
 			}
 		});
 		
@@ -110,7 +111,8 @@ public class GripsActivity extends OptionsActivity implements OnParseListener {
 				Intent intent = new Intent(GripsActivity.this, MailActivity.class);
 				intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION);
 				startActivity(intent);
-//				finish();
+				overridePendingTransition(0, 0);
+				finish();
 			}
 		});
 	}

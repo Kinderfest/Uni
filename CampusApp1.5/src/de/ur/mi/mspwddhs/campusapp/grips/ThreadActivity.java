@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import de.ur.mi.mspwddhs.campusapp.database.Database;
 import de.ur.mi.mspwddhs.campusapp.grips.ThreadParseController.ThreadParseListener;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import de.ur.mi.mspwddhs.campusapp.R;
 import android.os.Bundle;
@@ -18,12 +19,14 @@ public class ThreadActivity extends Activity implements ThreadParseListener {
 	private ThreadListAdapter listAdapt;
 	private ListView list;
 	private Database db;
+	private ProgressDialog dialog;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.grips_activity_thread);
 		System.out.println("oncreate");
+		setupLoadingScreen();
 		Intent intent = getIntent();
 		db = new Database(this);
 		db.open();
@@ -33,12 +36,21 @@ public class ThreadActivity extends Activity implements ThreadParseListener {
 		parse.initialize(intent.getStringExtra(CourseActivity.URL_KEY));
 	}
 	
+	private void setupLoadingScreen() {
+		dialog = new ProgressDialog(this);
+		dialog.setTitle(getResources().getString(R.string.download_dialog_title));
+		dialog.setMessage(getString(R.string.thread_dialog_message));
+		dialog.show();
+		
+	}
+
 	public void onPause() {
 	     super.onPause();
 	     overridePendingTransition(0, 0);
 	 }
 	@Override
 	public void onThreadDownloadCompleted(ArrayList<MyThread> data) {
+		dialog.dismiss();
 		list = (ListView) findViewById(R.id.thread_List);
 		listAdapt = new ThreadListAdapter(data, this);
 		list.setAdapter(listAdapt);

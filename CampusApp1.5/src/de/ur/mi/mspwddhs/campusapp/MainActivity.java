@@ -22,7 +22,6 @@ import de.ur.mi.mspwddhs.campusapp.plan.PlanActivity;
 public class MainActivity extends OptionsActivity implements LoginListener {
 	EditText user;
 	EditText pass;
-	EditText email;
 	ImageView logo;
 	Button button;
 	Database db;
@@ -34,21 +33,19 @@ public class MainActivity extends OptionsActivity implements LoginListener {
         setContentView(R.layout.login_layout); 
         db = new Database(this);
         db.open();
-        login = new LoginValidate(this);
+        login = new LoginValidate(this, this);
         if(db.isLoginTableEmpty()){
         logo = (ImageView) findViewById (R.id.logo_login);
         logo.setBackgroundResource(R.drawable.logo_ur);
         pass = (EditText) findViewById(R.id.editTextPass);
 		user = (EditText) findViewById(R.id.editTextUser);
-		email = (EditText) findViewById(R.id.editTextEmail);
 		button = (Button) findViewById(R.id.button1);
 		button.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				db.saveLoginData(user.getText().toString(), pass.getText().toString(), email.getText().toString());
 				onDownloadInitiation();
-				login.initiate(db);
+				login.initiate(user.getText().toString(), pass.getText().toString());
 			}
 
 		});
@@ -97,11 +94,10 @@ public class MainActivity extends OptionsActivity implements LoginListener {
 			toast.show();
 			changeToMensa();
 		} else {
-			Toast toast = Toast.makeText(this, "Logindaten falsch!", Toast.LENGTH_SHORT);
+			Toast toast = Toast.makeText(this, "Login fehlgeschlagen!", Toast.LENGTH_SHORT);
 			db.clearDatabaseLogin();
 			pass.setText("");
 			user.setText("");
-			email.setText("");
 			toast.show();
 		}
 	}

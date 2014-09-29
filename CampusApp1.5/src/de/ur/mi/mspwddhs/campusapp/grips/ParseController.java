@@ -113,7 +113,6 @@ public class ParseController {
 						response.getEntity().getContent()));
 				String line = "";
 				while ((line = rd.readLine()) != null) {
-					// System.out.println(line);
 					result += line;
 				}
 			} catch (final IOException e) {

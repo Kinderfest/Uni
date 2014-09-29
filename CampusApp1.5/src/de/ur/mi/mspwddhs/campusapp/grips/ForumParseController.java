@@ -53,7 +53,6 @@ public class ForumParseController {
 			String username = listener.getUser();
 			String password = listener.getPass();
 			String url = params[0];
-			System.out.println("Connecting to GRIPS");
 			String loginHtml = loginToGrips(ParseController.domainName,
 					username, password);
 			String html = getHttpFromUrl(url);
@@ -69,7 +68,6 @@ public class ForumParseController {
 
 		private String loginToGrips(String url, String username, String password) {
 			String result = "";
-			System.out.println("login");
 			cookieStore = new BasicCookieStore();
 			AbstractHttpClient client = new DefaultHttpClient();
 			HttpPost post = new HttpPost(url);
@@ -103,7 +101,6 @@ public class ForumParseController {
 						response.getEntity().getContent()));
 				String line = "";
 				while ((line = rd.readLine()) != null) {
-					// System.out.println(line);
 					result += line;
 				}
 			} catch (final IOException e) {
@@ -125,13 +122,10 @@ public class ForumParseController {
 						.select("a[href]").text();
 				Element date = row.select("td").select(".lastpost")
 						.select("a[href]").last();
-				// System.out.println(el);
 				if (thread != null) {
 					myForum.add(new Forum(thread.text(), thread
 							.attr("abs:href"), author, date.text()));
 				}
-				// System.out.println(row.select("td").select(".topic")
-				// .select("a[href]"));
 			}
 		}
 	}

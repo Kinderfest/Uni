@@ -1,0 +1,156 @@
+package de.ur.mi.mspwddhs.campusapp.mail;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.TimeZone;
+
+import de.ur.mi.mspwddhs.campusapp.R;
+
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.Typeface;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class ExpandableListAdapter extends BaseExpandableListAdapter {
+
+	private ArrayList<Email> data;
+	private Context context;
+	private Activity activity;
+	private String subject;
+		
+	public ExpandableListAdapter(ArrayList<Email> data, Context context,
+			Activity activity) {
+
+		this.data = data;
+		this.context = context;
+		this.activity = activity;
+		
+	}
+
+	@Override
+	public int getGroupCount() {
+
+		return data.size();
+
+	}
+
+	@Override
+	public int getChildrenCount(int groupPosition) {
+		return 1;
+	}
+
+	@Override
+	public Object getGroup(int groupPosition) {
+		return data.get(groupPosition);
+	}
+
+	@Override
+	public Object getChild(int groupPosition, int childPosition) {
+		return data.get(groupPosition);
+	}
+
+	@Override
+	public long getGroupId(int groupPosition) {
+		return groupPosition;
+	}
+
+	@Override
+	public long getChildId(int groupPosition, int childPosition) {
+		return childPosition;
+	}
+
+	@Override
+	public boolean hasStableIds() {
+		return true;
+	}
+
+	@Override
+	public View getGroupView(int groupPosition, boolean isExpanded,
+			View convertView, ViewGroup parent) {
+				
+		if (convertView == null) {
+			LayoutInflater infalInflater = (LayoutInflater) this.context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			convertView = infalInflater.inflate(R.layout.mail_list_group, parent,
+					false);
+		}
+		
+		TextView from = (TextView) convertView.findViewById(R.id.from);
+		from.setText("Von: " + data.get(groupPosition).getFrom() + " am "
+				+ (data.get(groupPosition).getDate()));
+		// from.setTextSize(20);
+
+		TextView subject = (TextView) convertView.findViewById(R.id.subject);
+		subject.setText("Betreff: " + data.get(groupPosition).getSubject());
+
+		return convertView;
+
+	}
+
+	@Override
+	public View getChildView(final int groupPosition, int childPosition,
+			boolean isLastChild, View convertView, ViewGroup parent) {
+
+		
+		if (convertView == null) {
+			LayoutInflater infalInflater = (LayoutInflater) this.context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			convertView = infalInflater.inflate(R.layout.mail_list_item, parent,
+					false);
+		}
+
+		Button answerButton = (Button) convertView
+				.findViewById(R.id.answerButton);
+		answerButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				((MailActivity) activity).mailAnswer(data.get(groupPosition)
+						.getSubject(), data.get(groupPosition).getFrom(), data.get(groupPosition).getTo());
+
+			}
+		});
+
+		TextView fromView = (TextView) convertView.findViewById(R.id.fromView);
+		fromView.setText(data.get(groupPosition).getFrom());
+
+		TextView dateView = (TextView) convertView.findViewById(R.id.dateView);
+		dateView.setText((data.get(groupPosition).getDate()));
+
+		TextView subjectView = (TextView) convertView
+				.findViewById(R.id.subjectView);
+		subjectView.setText(data.get(groupPosition).getSubject());
+		subject = data.get(groupPosition).getSubject();
+
+		TextView textView = (TextView) convertView.findViewById(R.id.textView);
+		String text = data.get(groupPosition).getContent();
+		textView.setText(Html.fromHtml(text));
+		textView.setMovementMethod(LinkMovementMethod.getInstance());
+
+		return convertView;
+	}
+
+	@Override
+	public boolean isChildSelectable(int groupPosition, int childPosition) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public String getSubject() {
+
+		return subject;
+
+	}
+}

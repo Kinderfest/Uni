@@ -50,7 +50,6 @@ public class GradesParseController {
 			String username = listener.getUser();
 			String password = listener.getPass();
 			String url = params[0];
-			System.out.println("Connecting to GRIPS");
 			String loginHtml = loginToGrips(ParseController.domainName,
 					username, password);
 			String html = getHttpFromUrl(url);
@@ -66,7 +65,6 @@ public class GradesParseController {
 
 		private String loginToGrips(String url, String username, String password) {
 			String result = "";
-			System.out.println("login");
 			cookieStore = new BasicCookieStore();
 			AbstractHttpClient client = new DefaultHttpClient();
 			HttpPost post = new HttpPost(url);
@@ -91,7 +89,6 @@ public class GradesParseController {
 
 		private String getHttpFromUrl(String url) {
 			String result = "";
-			System.out.println("hi");
 			@SuppressWarnings("resource")
 			AbstractHttpClient client = new DefaultHttpClient();
 			client.setCookieStore(cookieStore);
@@ -113,10 +110,8 @@ public class GradesParseController {
 		private void parseForum(String html) {
 
 			Document doc = Jsoup.parse(html);
-			System.out.println(html);
 			Element forum = doc.getElementsByTag("table")
 					.select(".boxaligncenter").first();
-			System.out.println(forum.text());
 			Elements rows = forum.getElementsByTag("tr");
 
 			for (Element row : rows) {

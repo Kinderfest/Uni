@@ -8,12 +8,18 @@ import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.AbstractHttpClient;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import de.ur.mi.mspwddhs.campusapp.database.Database;
 import de.ur.mi.mspwddhs.campusapp.grips.ParseController;
@@ -22,37 +28,57 @@ public class LoginValidate {
 	
 	private LoginListener listener;
 	private boolean response;
+	private Context context;
 	
-	public LoginValidate(LoginListener listener){
+	public LoginValidate(LoginListener listener, Context context){
 		this.listener = listener;
+		this.context = context;
 		response = false;
 	}
 	
 	
 	private class Login extends AsyncTask<String, String, String>{
+		
+		private CookieStore cookieStore;
+		private Database db;
 
 		@Override
 		protected String doInBackground(String... params) {
 			String user = params[0];
 			String pass = params[1];
-			String loginHtml = loginToGrips(ParseController.domainName,
+			String profileUrl = "https://elearning.uni-regensburg.de/user/edit.php";
+			loginToGrips(ParseController.domainName,
 					user, pass);
-			if(loginHtml.contains("Benutzername oder Kennwort vergessen?")){
+			String html = getHttpFromUrl(profileUrl);
+			if(html.contains("Benutzername oder Kennwort vergessen?")){
 				response = false;
 			} else {
+				String email = parseProfile(html);
+				db = new Database(context);
+				db.open();
+				db.saveLoginData(user, pass, email);
+				db.close();
 				response = true;
+				
 			}
 			
 			return "";
 		}
 		
+		private String parseProfile(String html) {
+			Document doc = Jsoup.parse(html);
+			Element e = doc.select("#id_email").first();
+			return e.attr("abs:value");
+		}
+
 		@Override
 		protected void onPostExecute(String result) {
 		listener.onFinish(response);
 		}
 		
-		private String loginToGrips(String url, String username, String password) {
+		private void loginToGrips(String url, String username, String password) {
 			String result = "";
+			cookieStore = new BasicCookieStore();
 			System.out.println("login");
 			AbstractHttpClient client = new DefaultHttpClient();
 			HttpPost post = new HttpPost(url);
@@ -67,13 +93,29 @@ public class LoginValidate {
 						"1"));
 				post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 				HttpResponse response = client.execute(post);
+				cookieStore = client.getCookieStore();
+
+			
+				
+			} catch (final IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		private String getHttpFromUrl(String url) {
+			String result = "";
+			@SuppressWarnings("resource")
+			AbstractHttpClient client = new DefaultHttpClient();
+			client.setCookieStore(cookieStore);
+			HttpPost post = new HttpPost(url);
+			try {
+				HttpResponse response = client.execute(post);
 				BufferedReader rd = new BufferedReader(new InputStreamReader(
 						response.getEntity().getContent()));
 				String line = "";
 				while ((line = rd.readLine()) != null) {
 					result += line;
 				}
-				
 			} catch (final IOException e) {
 				e.printStackTrace();
 			}
@@ -85,7 +127,7 @@ public class LoginValidate {
 		public void onFinish(boolean response);
 	}
 
-	public void initiate(Database db) {
-		new Login().execute(db.getLoginData().get(0), db.getLoginData().get(1));
+	public void initiate(String user, String pass) {
+		new Login().execute(user, pass);
 	}
 }

@@ -55,7 +55,7 @@ public class Answer extends Activity {
 		password = intent.getStringExtra(MailActivity.PASSWORD_KEY);
 		reciever = intent.getStringExtra(MailActivity.RECIPIENTS_KEY);
 		subject = intent.getStringExtra(MailActivity.SUBJECT_KEY);
-		System.out.println("auf gut Glï¿½ck");
+		System.out.println("auf gut Glück");
 		mailSubject = "RE: " + subject;
 		
 		

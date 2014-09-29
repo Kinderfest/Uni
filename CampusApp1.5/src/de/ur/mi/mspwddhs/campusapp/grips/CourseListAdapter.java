@@ -31,9 +31,7 @@ public class CourseListAdapter extends BaseExpandableListAdapter {
 	private void postItems() {
 		System.out.println("Data size is: " + data.size());
 		for (int i = 0; i < data.size(); i++) {
-			System.out.println(data.get(i).getCourseName());
 			for (int j = 0; j < data.get(i).getListLinks().size(); j++) {
-				System.out.println(data.get(i).getListLinks().get(j).getName());
 			}
 		}
 	}

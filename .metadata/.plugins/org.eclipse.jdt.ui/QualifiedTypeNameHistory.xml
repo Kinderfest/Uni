@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="android.app.ProgressDialog"/>
+<fullyQualifiedTypeName name="de.ur.mi.mspwddhs.campusapp.R.id"/>
+<fullyQualifiedTypeName name="de.ur.mi.mspwddhs.campusapp.R.string"/>
+<fullyQualifiedTypeName name="org.apache.http.client.CookieStore"/>
+<fullyQualifiedTypeName name="org.apache.http.impl.client.BasicCookieStore"/>
+<fullyQualifiedTypeName name="org.jsoup.nodes.Document"/>
+<fullyQualifiedTypeName name="org.jsoup.Jsoup"/>
+<fullyQualifiedTypeName name="org.jsoup.nodes.Element"/>
+<fullyQualifiedTypeName name="de.ur.mi.mspwddhs.campusapp.LoginValidate"/>
+<fullyQualifiedTypeName name="de.ur.mi.mspwddhs.campusapp.database.Database"/>
+<fullyQualifiedTypeName name="android.content.Context"/>
+</qualifiedTypeNameHistroy>

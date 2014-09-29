@@ -1127,7 +1127,7 @@ containing a value of this type.
         public static final int vegan=0x7f020080;
     }
     public static final class id {
-        public static final int about=0x7f05008c;
+        public static final int about=0x7f05008b;
         public static final int aboutImage=0x7f05003d;
         public static final int aboutText=0x7f05003c;
         public static final int action_bar=0x7f05001c;
@@ -1143,90 +1143,89 @@ containing a value of this type.
         public static final int action_mode_close_button=0x7f050024;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
-        public static final int an=0x7f050063;
-        public static final int answerButton=0x7f050066;
-        public static final int answerEdit=0x7f050065;
-        public static final int answered=0x7f05006a;
+        public static final int an=0x7f050062;
+        public static final int answerButton=0x7f050065;
+        public static final int answerEdit=0x7f050064;
+        public static final int answered=0x7f050069;
         public static final int beginning=0x7f050011;
-        public static final int button1=0x7f05005c;
+        public static final int button1=0x7f05005b;
         public static final int buttons=0x7f05003e;
-        public static final int campusplan=0x7f050088;
+        public static final int campusplan=0x7f050087;
         public static final int checkbox=0x7f05002d;
         public static final int collapse=0x7f05004f;
         public static final int collapseActionView=0x7f05000d;
-        public static final int container=0x7f05005d;
-        public static final int date=0x7f050069;
+        public static final int container=0x7f05005c;
+        public static final int date=0x7f050068;
         public static final int default_activity_button=0x7f050028;
         public static final int dialog=0x7f05000e;
         public static final int disableHome=0x7f050008;
         public static final int dropdown=0x7f05000f;
-        public static final int editTextEmail=0x7f05005b;
         public static final int editTextPass=0x7f05005a;
         public static final int editTextUser=0x7f050059;
         public static final int edit_query=0x7f050030;
         public static final int end=0x7f050013;
-        public static final int expand=0x7f050061;
+        public static final int expand=0x7f050060;
         public static final int expand_activities_button=0x7f050026;
         public static final int expanded_menu=0x7f05002c;
-        public static final int food_image1=0x7f050074;
-        public static final int food_image2=0x7f050078;
-        public static final int food_image3=0x7f05007c;
-        public static final int food_image4=0x7f050080;
-        public static final int food_image5=0x7f050084;
-        public static final int food_name1=0x7f050072;
-        public static final int food_name2=0x7f050076;
-        public static final int food_name3=0x7f05007a;
-        public static final int food_name4=0x7f05007e;
-        public static final int food_name5=0x7f050082;
-        public static final int food_price1=0x7f050073;
-        public static final int food_price2=0x7f050077;
-        public static final int food_price3=0x7f05007b;
-        public static final int food_price4=0x7f05007f;
-        public static final int food_price5=0x7f050083;
-        public static final int foods=0x7f050071;
+        public static final int food_image1=0x7f050073;
+        public static final int food_image2=0x7f050077;
+        public static final int food_image3=0x7f05007b;
+        public static final int food_image4=0x7f05007f;
+        public static final int food_image5=0x7f050083;
+        public static final int food_name1=0x7f050071;
+        public static final int food_name2=0x7f050075;
+        public static final int food_name3=0x7f050079;
+        public static final int food_name4=0x7f05007d;
+        public static final int food_name5=0x7f050081;
+        public static final int food_price1=0x7f050072;
+        public static final int food_price2=0x7f050076;
+        public static final int food_price3=0x7f05007a;
+        public static final int food_price4=0x7f05007e;
+        public static final int food_price5=0x7f050082;
+        public static final int foods=0x7f050070;
         public static final int forum_list=0x7f050043;
         public static final int forum_list_author=0x7f050046;
         public static final int forum_list_date=0x7f050047;
         public static final int forum_list_thread=0x7f050048;
         public static final int forum_title=0x7f050042;
-        public static final int from=0x7f050067;
-        public static final int fromEmail=0x7f050068;
+        public static final int from=0x7f050066;
+        public static final int fromEmail=0x7f050067;
         public static final int grades_list_feedback=0x7f05004a;
         public static final int grades_list_name=0x7f050049;
         public static final int grades_list_percentile=0x7f05004c;
         public static final int grades_list_points=0x7f05004b;
         public static final int grips=0x7f05003f;
         public static final int gripsButton_grips=0x7f050050;
-        public static final int gripsButton_mail=0x7f05005e;
-        public static final int headerfood=0x7f050070;
-        public static final int help=0x7f05008d;
+        public static final int gripsButton_mail=0x7f05005d;
+        public static final int headerfood=0x7f05006f;
+        public static final int help=0x7f05008c;
         public static final int helpImage=0x7f050057;
         public static final int home=0x7f050014;
         public static final int homeAsUp=0x7f050005;
         public static final int icon=0x7f05002a;
         public static final int ifRoom=0x7f05000a;
         public static final int image=0x7f050027;
-        public static final int img=0x7f050087;
-        public static final int line2=0x7f050075;
-        public static final int line3=0x7f050079;
-        public static final int line4=0x7f05007d;
-        public static final int line5=0x7f050081;
+        public static final int img=0x7f050086;
+        public static final int line2=0x7f050074;
+        public static final int line3=0x7f050078;
+        public static final int line4=0x7f05007c;
+        public static final int line5=0x7f050080;
         public static final int list=0x7f050053;
         public static final int listMode=0x7f050001;
         public static final int list_item=0x7f050029;
         public static final int list_item_name=0x7f05004d;
         public static final int list_title_name=0x7f05004e;
         public static final int logo_login=0x7f050058;
-        public static final int logout=0x7f05008e;
+        public static final int logout=0x7f05008d;
         public static final int mail=0x7f050041;
         public static final int mailButton_grips=0x7f050052;
-        public static final int mailButton_mail=0x7f050060;
+        public static final int mailButton_mail=0x7f05005f;
         public static final int mensa=0x7f050040;
         public static final int mensaButton_grips=0x7f050051;
-        public static final int mensaButton_mail=0x7f05005f;
-        public static final int mensa_week=0x7f05006e;
-        public static final int mensaschluss=0x7f05006f;
-        public static final int mensatitle=0x7f05006d;
+        public static final int mensaButton_mail=0x7f05005e;
+        public static final int mensa_week=0x7f05006d;
+        public static final int mensaschluss=0x7f05006e;
+        public static final int mensatitle=0x7f05006c;
         public static final int middle=0x7f050012;
         public static final int never=0x7f050009;
         public static final int none=0x7f050010;
@@ -1234,11 +1233,11 @@ containing a value of this type.
         public static final int progress_circular=0x7f050018;
         public static final int progress_horizontal=0x7f050019;
         public static final int radio=0x7f05002f;
-        public static final int refresh_grips=0x7f05008b;
-        public static final int refresh_mail=0x7f050089;
-        public static final int refresh_mensa=0x7f05008a;
-        public static final int rel_lay_mail_ans=0x7f050062;
-        public static final int rel_mensa_parent=0x7f050085;
+        public static final int refresh_grips=0x7f05008a;
+        public static final int refresh_mail=0x7f050088;
+        public static final int refresh_mensa=0x7f050089;
+        public static final int rel_lay_mail_ans=0x7f050061;
+        public static final int rel_mensa_parent=0x7f050084;
         public static final int search_badge=0x7f050032;
         public static final int search_bar=0x7f050031;
         public static final int search_button=0x7f050033;
@@ -1249,16 +1248,16 @@ containing a value of this type.
         public static final int search_plate=0x7f050036;
         public static final int search_src_text=0x7f050037;
         public static final int search_voice_btn=0x7f05003b;
-        public static final int sendSubject=0x7f050064;
+        public static final int sendSubject=0x7f050063;
         public static final int shortcut=0x7f05002e;
         public static final int showCustom=0x7f050007;
         public static final int showHome=0x7f050004;
         public static final int showTitle=0x7f050006;
         public static final int split_action_bar=0x7f05001e;
-        public static final int subject=0x7f05006b;
+        public static final int subject=0x7f05006a;
         public static final int submit_area=0x7f050039;
         public static final int tabMode=0x7f050002;
-        public static final int textView=0x7f05006c;
+        public static final int textView=0x7f05006b;
         public static final int thread_List=0x7f050045;
         public static final int thread_list_author=0x7f050054;
         public static final int thread_list_content=0x7f050056;
@@ -1269,7 +1268,7 @@ containing a value of this type.
         public static final int up=0x7f050021;
         public static final int useLogo=0x7f050003;
         public static final int withText=0x7f05000c;
-        public static final int wochentag=0x7f050086;
+        public static final int wochentag=0x7f050085;
     }
     public static final class integer {
         /**  The maximum number of action buttons that should be permitted within
@@ -1397,6 +1396,7 @@ containing a value of this type.
         public static final int app_name=0x7f0a000d;
         public static final int beilagen=0x7f0a0011;
         public static final int campusplan=0x7f0a001a;
+        public static final int download_dialog_title=0x7f0a0029;
         public static final int error_text=0x7f0a0017;
         public static final int error_title=0x7f0a0016;
         public static final int hauptgerichte=0x7f0a000e;
@@ -1416,6 +1416,7 @@ containing a value of this type.
         public static final int send=0x7f0a0025;
         public static final int send_button_text=0x7f0a0021;
         public static final int suppen=0x7f0a000f;
+        public static final int thread_dialog_message=0x7f0a002a;
         public static final int updating_text=0x7f0a0015;
         public static final int updating_title=0x7f0a0014;
     }
@@ -2796,7 +2797,7 @@ containing a value of this type.
          */
         public static final int[] MenuView = {
             0x010100ae, 0x0101012c, 0x0101012d, 0x0101012e,
-            0x0101012f, 0x01010130, 0x01010131, 0x01010438
+            0x0101012f, 0x01010130, 0x01010131, 0x01010435
         };
         /**
           <p>
