@@ -1,18 +1,15 @@
 package de.ur.mi.mspwddhs.campusapp.mail;
 
-import java.io.BufferedInputStream;
+
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Properties;
 
 import javax.activation.CommandMap;
 import javax.activation.MailcapCommandMap;
 import javax.mail.Address;
 import javax.mail.FetchProfile;
-import javax.mail.FetchProfile.Item;
 import javax.mail.Flags;
 import javax.mail.Flags.Flag;
 import javax.mail.Folder;
@@ -25,15 +22,12 @@ import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.search.FlagTerm;
 
-import com.sun.mail.imap.IMAPFolder.FetchProfileItem;
-
-import android.content.Context;
+import de.ur.mi.mspwddhs.campusapp.database.Database;
 import android.os.AsyncTask;
 
 public class Controller1 extends AsyncTask<String, String, String> {
 	
-	private static final int MAX_NUMBER_OF_MAILS = 10;
-
+	private Database db;
 	Folder inbox;
 
 	private String user;
@@ -43,7 +37,7 @@ public class Controller1 extends AsyncTask<String, String, String> {
 	private Multipart mp;
 	private boolean textIsHtml = false;
 
-	private int numOfUnreadMessages;
+	private int numOfMessages;
 
 	ArrayList<Email> emailList;
 
@@ -53,7 +47,8 @@ public class Controller1 extends AsyncTask<String, String, String> {
 
 	private Message message[];
 
-	public Controller1(emailListener listener) {
+	public Controller1(emailListener listener, Database db) {
+		this.db = db;
 		initialise(listener);
 	}
 
@@ -66,9 +61,9 @@ public class Controller1 extends AsyncTask<String, String, String> {
 	@Override
 	protected String doInBackground(String... params) {
 
-		user = params[1];
-		password = params[2];
-
+		user = params[0];
+		password = params[1];
+		
 		setup();
 		return null;
 
@@ -87,19 +82,23 @@ public class Controller1 extends AsyncTask<String, String, String> {
 			store.connect(host, user, password);
 
 			inbox = store.getFolder("INBOX");
-			numOfUnreadMessages = inbox.getUnreadMessageCount();
-
-
-			inbox.open(Folder.READ_ONLY);
-
+			numOfMessages = inbox.getMessageCount();
+			
+			inbox.open(Folder.READ_WRITE);
+			
 			Message messages[] = inbox.search(new FlagTerm(
 					new Flags(Flag.SEEN), false));
+			inbox.setFlags(messages, new Flags(Flags.Flag.SEEN), true);
+			
+			//Message messages[] = inbox.getMessages();
+			
 			message = messages;
 
 			FetchProfile fp = new FetchProfile();
-				fp.add(FetchProfile.Item.ENVELOPE);
-				fp.add(FetchProfile.Item.CONTENT_INFO);
-				inbox.fetch(messages, fp);
+			fp.add(FetchProfile.Item.ENVELOPE);
+			fp.add(FetchProfile.Item.CONTENT_INFO);
+			inbox.fetch(messages, fp);
+
 			try {
 				fillMails(messages);
 				inbox.close(true);
@@ -138,29 +137,26 @@ public class Controller1 extends AsyncTask<String, String, String> {
 	}
 
 	private void fillMails(Message[] message) throws MessagingException,
-			IOException {
+	IOException {
 
 		emailList = new ArrayList<Email>();
-		int numMails;
-		if(numOfUnreadMessages>MAX_NUMBER_OF_MAILS) { 
-			numMails = MAX_NUMBER_OF_MAILS;
-		} else {
-			numMails = numOfUnreadMessages;
-		}
 
-		for (int i = 0; i < numMails; i++) {
+		for (int i = 0; i < numOfMessages; i++) 
+		{
 			content = "";
 			getCompleteMail(message[i]);
 
 		}
 
-	}
+}
 
 	private void getCompleteMail(Message message) throws MessagingException,
 			IOException {
 
 		Address[] param;
-
+		String subject;
+		
+		SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy HH:mm");
 		String to = "";
 		String from = "";
 
@@ -175,18 +171,43 @@ public class Controller1 extends AsyncTask<String, String, String> {
 				to += param[j];
 			}
 		}
-		String contentType = message.getContent().toString();
-
-		String sender = from;
-		String recipients = to;
-		String subject = message.getSubject();
-		Date receivedDate = message.getReceivedDate();
-
+			
+		if(message.getSubject() == null)
+		{
+			subject = "";
+		}
+		else
+		{
+			subject = message.getSubject();
+		}
+		String currentDateString = df.format(message.getReceivedDate());
 		String content = getText(message);
+		
 
-		email = new Email(from, to, receivedDate, subject, content);
-		emailList.add(email);
-
+		try
+		{
+			if(db.getCountOfMails(currentDateString) == 0)
+			{
+				db.addContentMail(from, to, currentDateString, subject, content);
+			}
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+	}
+	
+	public void addEmailObjects()
+	{
+		ArrayList<String> EmailObjects = db.getContentMail();
+		
+		for(int i = 0; i < EmailObjects.size(); i++)
+		{
+			String toList = EmailObjects.get(i);
+			String[] Array = toList.split("µ");
+			email = new Email(Array[0], Array[1], Array[2], Array[3], Array[4]);
+			emailList.add(email);
+		}
 	}
 
 	public interface emailListener {
@@ -197,12 +218,13 @@ public class Controller1 extends AsyncTask<String, String, String> {
 
 	private String getText(Part p) throws MessagingException, IOException {
 		if (p.isMimeType("text/*")) {
-			String s = (String) p.getContent();
+			String contentString = (String) p.getContent();
 			textIsHtml = p.isMimeType("text/html");
-			return s;
+			return contentString;
 		}
 
 		if (p.isMimeType("multipart/alternative")) {
+
 			Multipart mp = (Multipart) p.getContent();
 			String text = null;
 			for (int i = 0; i < mp.getCount(); i++) {
