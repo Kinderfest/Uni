@@ -1,0 +1,93 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="top" 
+    android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
+    
+    <TableLayout
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+	<TableRow
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" >
+
+	<Button
+        android:id="@+id/grips"
+        android:layout_weight="1"
+        android:background="@color/light_grey"
+        android:textColor="@color/heidenelke"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:onClick="onClick"/>
+	
+	<View
+    	android:layout_width="1dip"
+    	android:layout_height="fill_parent"
+    	android:background="@color/white"
+	/>
+
+    <Button
+        android:id="@+id/mensa"  
+        android:background="@color/light_grey"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:onClick="onClick"/>
+    
+    <View
+    	android:layout_width="1dip"
+    	android:layout_height="fill_parent"
+    	android:background="@color/white"
+	/>
+
+    <Button
+        android:id="@+id/mail"
+        android:layout_weight="1"
+        android:background="@color/light_grey"
+         android:textColor="@color/heidenelke"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:onClick="onClick" />    
+	</TableRow>
+	
+	</TableLayout> 
+	
+    <TextView 
+        android:id="@+id/mensatitle"
+        android:layout_below="@id/buttons"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+         android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:textColor="@color/heidenelke"
+        android:textSize="20dp"/>
+    
+    
+    <ExpandableListView 
+        android:id="@+id/mensa_week"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@id/mensatitle"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
+    
+    <TextView android:id="@+id/mensaschluss"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="5dp"
+        android:layout_below="@id/mensa_week"
+        android:gravity="right"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textColor="@color/heidenelke"
+        android:textSize="20dp"
+        android:layout_marginBottom="5dp"/>
+    
+    
+
+</RelativeLayout>
+
+
